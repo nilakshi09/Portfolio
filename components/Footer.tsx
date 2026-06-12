@@ -9,7 +9,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         {/* Left - Copyright */}
         <p className="text-sm text-text-muted">
-          Designed & built by Nilakshi Rahangdale · 2025
+          Designed & built by Nilakshi Rahangdale · 2026
         </p>
 
         {/* Right - Social Icons */}
