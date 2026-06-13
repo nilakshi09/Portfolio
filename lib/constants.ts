@@ -39,9 +39,8 @@ export const socialLinks = [
 // Stats
 export const stats = [
   { value: '5+', label: 'Projects Shipped' },
-  { value: '1', label: 'Internship' },
-  { value: '95%', label: 'Sensor Accuracy (Pramaan)' },
-  { value: '4+', label: 'Technology Stacks' },
+  { value: '1', label: 'Full-Stack Intern' },
+  { value: '3+', label: 'ERP & LMS Systems' },
 ];
 
 // Skills
