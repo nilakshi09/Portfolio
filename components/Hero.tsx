@@ -3,7 +3,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
-import { Github, Linkedin, Mail, ArrowRight, Download } from 'lucide-react';
+import { Github, Linkedin, Mail, ArrowRight } from 'lucide-react';
 import { heroTitles, heroShowcaseCards, socialLinks } from '@/lib/constants';
 
 export function Hero() {
@@ -102,15 +102,15 @@ export function Hero() {
                 <ArrowRight className="w-4 h-4" />
               </a>
               <a
-                href="/resume.pdf"
+                href="mailto:nilakshirahangdale31@gmail.com"
                 className="relative inline-flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-[10px] overflow-hidden group"
               >
                 <span className="absolute inset-0 border border-transparent bg-gradient-to-r from-primary-blue to-primary-purple rounded-[10px]" style={{ padding: '1px' }} />
                 <span className="absolute inset-[1px] bg-[#050505] rounded-[9px] group-hover:opacity-0 transition-opacity duration-300" />
                 <span className="absolute inset-0 bg-gradient-to-r from-primary-blue to-primary-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[10px]" />
                 <span className="relative flex items-center gap-2 text-transparent bg-clip-text bg-gradient-to-r from-primary-blue to-primary-purple group-hover:text-white transition-colors duration-300">
-                  <Download className="w-4 h-4" />
-                  Download Resume
+                  <Mail className="w-4 h-4" />
+                  Get In Touch
                 </span>
               </a>
             </motion.div>
