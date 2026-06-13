@@ -6,7 +6,6 @@ import {
   Cpu,
   Database,
   Cloud,
-  CircuitBoard,
 } from 'lucide-react';
 
 // Navigation
@@ -75,16 +74,6 @@ export const skillGroups = [
     category: 'Cloud & DevOps',
     icon: Cloud,
     skills: ['Git', 'GitHub', 'Vercel', 'AWS', 'Postman'],
-  },
-  {
-    category: 'IoT & Systems',
-    icon: CircuitBoard,
-    skills: [
-      'ESP32',
-      'Sensor Integration',
-      'Real-Time Data Pipelines',
-      'Arduino',
-    ],
   },
 ];
 
