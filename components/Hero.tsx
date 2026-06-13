@@ -79,7 +79,7 @@ export function Hero() {
             >
               <p className="text-base text-text-secondary leading-relaxed max-w-md">
                 I write code that ships — full-stack, end-to-end,
-                every layer thought through and every detail deliberate.
+                built with intention and the kind of care that shows up in the details.
               </p>
             </motion.div>
 
