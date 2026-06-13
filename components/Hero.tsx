@@ -77,13 +77,9 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.6 }}
               className="mb-8"
             >
-              <p className="text-lg font-semibold text-text-primary mb-3">
-                Final year. Already shipped.
-              </p>
               <p className="text-base text-text-secondary leading-relaxed max-w-md">
-                I build production-grade web applications, scalable APIs,
-                real-time IoT systems, and polished user experiences
-                that solve meaningful problems.
+                I write code that ships — full-stack, end-to-end,
+                built with intention and the kind of care that shows up in the details.
               </p>
             </motion.div>
 
