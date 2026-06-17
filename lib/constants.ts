@@ -95,7 +95,7 @@ export const projects = [
       'Tailwind CSS',
     ],
     github: 'https://github.com/nilakshi09',
-    live: null,
+    live: 'https://find-my-trial-teal.vercel.app/',
     mockUI: ['Phase II', 'Oncology', 'Recruiting'],
   },
   {
@@ -115,7 +115,7 @@ export const projects = [
       'Framer Motion',
     ],
     github: 'https://github.com/nilakshi09',
-    live: null,
+    live: 'https://spotbot-sigma.vercel.app/',
     mockUI: ['Fake Followers 34%', 'Engagement Drop ↓'],
   },
   {
@@ -128,7 +128,7 @@ export const projects = [
       'Automated subscription cost-splitting platform for friend groups. Tracks shared plans, calculates each person\'s share, and streamlines payment coordination without manual back-and-forth.',
     stack: ['Next.js', 'TypeScript', 'Node.js', 'PostgreSQL', 'Tailwind CSS'],
     github: 'https://github.com/nilakshi09',
-    live: null,
+    live: 'https://sub-split-one.vercel.app/',
   },
   {
     id: 4,
@@ -147,7 +147,7 @@ export const projects = [
       'Sensor APIs',
     ],
     github: 'https://github.com/nilakshi09',
-    live: null,
+    live: 'https://production-pramaan.vercel.app/',
     mockUI: ['pH 7.2 ✓', 'TDS 480ppm ⚠'],
   },
   {

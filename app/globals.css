@@ -542,16 +542,16 @@
   border-color: rgba(255, 255, 255, 0.4);
 }
 
-/* Live Demo Button: Teal Filled */
+/* Live Demo Button: Outlined (Same as GitHub) */
 .cp-link-btn--demo {
-  background: #2DD4BF;
-  border: 1px solid #2DD4BF;
-  color: #000;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FAFAFA;
 }
 
 .cp-link-btn--demo:hover:not(.cp-link-btn--disabled) {
-  background: #14B8A6;
-  border-color: #14B8A6;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
 /* Disabled Demo Button */
@@ -559,9 +559,9 @@
   opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
-  background: rgba(45, 212, 191, 0.1);
-  border-color: rgba(45, 212, 191, 0.2);
-  color: #2DD4BF;
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .cp-link-icon {

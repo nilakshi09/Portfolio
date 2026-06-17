@@ -37,6 +37,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if (window.location.hash) {
+                window.history.replaceState(null, '', window.location.pathname);
+              }
+              window.history.scrollRestoration = 'manual';
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >

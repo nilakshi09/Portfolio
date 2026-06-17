@@ -6,7 +6,7 @@ import { socialLinks } from '@/lib/constants';
 
 export function Hero() {
   return (
-    <section className="relative min-h-screen px-6 lg:px-8 overflow-hidden">
+    <section id="hero" className="relative min-h-screen px-6 lg:px-8 overflow-hidden">
       <div className="relative max-w-7xl mx-auto w-full min-h-screen">
 
         {/* Left Side — Label + Name */}

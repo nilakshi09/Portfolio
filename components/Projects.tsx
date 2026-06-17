@@ -25,8 +25,14 @@ export function Projects() {
     setTimeout(() => setExitIndex(null), 500);
   }
 
+  const isMounted = useRef(false);
+
   // Scroll active tab into view on mobile
   useEffect(() => {
+    if (!isMounted.current) {
+      isMounted.current = true;
+      return;
+    }
     if (!tabsRef.current) return;
     const activeTab = tabsRef.current.children[activeIndex] as HTMLElement;
     if (activeTab) {
