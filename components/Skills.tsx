@@ -15,15 +15,9 @@ export function Skills() {
           transition={{ duration: 0.5 }}
           className="mb-6"
         >
-          <span className="font-mono text-xs uppercase tracking-wider text-text-secondary">
-            Skills
-          </span>
-          <h2 className="text-4xl font-bold text-text-primary mt-3">
+          <h2 className="text-4xl font-bold text-text-primary">
             Tech Stack
           </h2>
-          <p className="text-text-secondary mt-2">
-            Tools I build with — not just list on a résumé.
-          </p>
         </motion.div>
 
         {/* Skill Groups */}
@@ -54,10 +48,6 @@ export function Skills() {
                       duration: 0.3,
                       delay: groupIndex * 0.1 + skillIndex * 0.05,
                     }}
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: '0 0 12px rgba(45, 212, 191, 0.15)',
-                    }}
                     className="
                       px-4 py-2
                       font-mono text-sm
@@ -65,9 +55,9 @@ export function Skills() {
                       border border-white/[0.08]
                       rounded-full
                       text-text-secondary
-                      hover:border-accent/40
-                      hover:text-text-primary
-                      transition-all duration-200
+                      hover:border-[#14b8a6]
+                      hover:text-[#14b8a6]
+                      transition-colors duration-200 ease-in-out
                       cursor-default
                       outline-none focus:outline-none
                     "

@@ -45,25 +45,19 @@ export function Experience() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="experience-header"
         >
-          <span className="font-mono text-xs uppercase tracking-wider text-text-secondary">
-            Experience
-          </span>
           <h2 className="experience-title">Experience</h2>
-          <p className="experience-subtitle">
-            Currently building real-world experience through:
-          </p>
         </motion.div>
 
         {/* Experience Entry — open layout */}
-        <div className="exp-entry max-w-[900px]">
-          {/* Top Row */}
-          <div className="exp-top-row">
+        <div className="exp-entry">
+          <div className="exp-grid">
+            {/* Left column */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.15 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-              className="exp-left"
+              className="exp-col-left"
             >
               {/* Date row */}
               <div className="exp-date-row">
@@ -76,63 +70,64 @@ export function Experience() {
 
               {/* Company · location */}
               <p className="exp-company">{internship.company}</p>
-            </motion.div>
 
-            <div className="exp-right">
-              {stats.map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.15 }}
-                  transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
-                  className="stat-card"
-                >
-                  <div className="stat-card-value">{stat.value}</div>
-                  <div className="stat-card-label">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+              {/* Stats Cards */}
+              <div className="exp-stats">
+                {stats.map((stat, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
+                    className="stat-card"
+                  >
+                    <div className="stat-card-value">{stat.value}</div>
+                    <div className="stat-card-label">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
 
-          {/* Divider */}
-          <motion.div
-            initial={{ width: '0%', opacity: 0 }}
-            whileInView={{ width: '100%', opacity: 1 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="exp-divider"
-          />
-
-          {/* Bullet points */}
-          <ul className="exp-bullets">
-            {internship.outcomes.map((item, i) => (
-              <motion.li
-                key={i}
+              {/* Tech stack tags */}
+              <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
-                className="exp-bullet"
+                transition={{ duration: 0.4, delay: 0.3 }}
+                className="exp-tags"
               >
-                <span className="exp-arrow" aria-hidden="true">→</span>
-                <span className="exp-bullet-text">{item}</span>
-              </motion.li>
-            ))}
-          </ul>
+                {internship.tags.map((tag, i) => (
+                  <span key={i} className="exp-tag">{tag}</span>
+                ))}
+              </motion.div>
+            </motion.div>
 
-          {/* Tech stack tags */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.4, delay: 0.3 + internship.outcomes.length * 0.08 + 0.1 }}
-            className="exp-tags"
-          >
-            {internship.tags.map((tag, i) => (
-              <span key={i} className="exp-tag">{tag}</span>
-            ))}
-          </motion.div>
+            {/* Right column */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="exp-col-right"
+            >
+              {/* Bullet points */}
+              <ul className="exp-bullets">
+                {internship.outcomes.map((item, i) => (
+                  <motion.li
+                    key={i}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
+                    className="exp-bullet"
+                  >
+                    <span className="exp-arrow" aria-hidden="true">→</span>
+                    <span className="exp-bullet-text">{item}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

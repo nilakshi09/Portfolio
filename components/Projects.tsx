@@ -60,11 +60,7 @@ export function Projects() {
       {/* ── Section header ── */}
       <div className="cp-header-wrap">
         <div className="cp-header cp-anim-header">
-          <span className="cp-header-tag">Projects</span>
-          <h2 className="cp-title">Selected Work</h2>
-          <p className="cp-subtitle">
-            Real products. Real users. Real impact.
-          </p>
+          <h2 className="cp-title">Projects</h2>
         </div>
       </div>
 
@@ -108,10 +104,7 @@ export function Projects() {
                   {String(index + 1).padStart(2, '0')} / {String(totalProjects).padStart(2, '0')}
                 </span>
 
-                <h3
-                  className="cp-project-name"
-                  style={{ color: PROJECT_ACCENT }}
-                >
+                <h3 className="cp-project-name">
                   {project.title}
                 </h3>
 
@@ -167,15 +160,12 @@ export function Projects() {
                 </div>
 
                 {project.mockUI && project.mockUI.length > 0 && (
-                  <div className="cp-metric">
-                    <span
-                      className="cp-metric-value"
-                      style={{ color: PROJECT_ACCENT }}
-                    >
+                  <div className="cp-highlight">
+                    <span className="cp-highlight-label">
                       {project.mockUI[0]}
                     </span>
                     {project.mockUI.length > 1 && (
-                      <span className="cp-metric-label">
+                      <span className="cp-highlight-sub">
                         {project.mockUI.slice(1).join(' · ')}
                       </span>
                     )}

@@ -43,8 +43,6 @@ export function Contact() {
       {/* Animated background elements */}
       <div className="contact-bg" aria-hidden="true">
         <div className="contact-orb contact-orb--primary" />
-        <div className="contact-orb contact-orb--secondary" />
-        <div className="contact-orb contact-orb--accent" />
         <div className="contact-grid-texture" />
       </div>
 
