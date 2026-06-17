@@ -14,17 +14,16 @@ const config: Config = {
         mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
       },
       colors: {
-        background: '#050505',
+        background: '#0A0A0F',
         surface: 'rgba(255, 255, 255, 0.03)',
         border: 'rgba(255, 255, 255, 0.08)',
         'text-primary': '#FAFAFA',
         'text-secondary': '#A1A1AA',
         'text-muted': '#52525B',
-        primary: {
-          blue: '#3B82F6',
-          indigo: '#6366F1',
-          purple: '#8B5CF6',
-          cyan: '#06B6D4',
+        accent: {
+          DEFAULT: '#2DD4BF',
+          hover: '#5EEAD4',
+          muted: '#14B8A6',
         },
       },
       backgroundImage: {
@@ -32,7 +31,7 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'gradient-primary':
-          'linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #8B5CF6 100%)',
+          'linear-gradient(135deg, #2DD4BF 0%, #14B8A6 100%)',
         'dot-grid':
           'radial-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px)',
       },
@@ -44,7 +43,9 @@ const config: Config = {
         button: '10px',
       },
       spacing: {
-        section: '120px',
+        'section': '96px',
+        'section-tablet': '64px',
+        'section-mobile': '48px',
       },
       keyframes: {
         'accordion-down': {

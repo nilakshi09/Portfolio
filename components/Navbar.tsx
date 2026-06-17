@@ -37,7 +37,7 @@ export function Navbar() {
         transition={{ duration: 0.5, delay: 0.2 }}
         className={`
           fixed top-0 left-0 right-0 z-50 transition-all duration-300
-          ${isScrolled ? 'backdrop-blur-md bg-white/[0.03] border-b border-white/[0.06]' : ''}
+          ${isScrolled ? 'backdrop-blur-xl bg-[#0A0A0F]/80 border-b border-white/[0.06]' : ''}
           ${scrollDirection === 'down' ? '-translate-y-full' : 'translate-y-0'}
         `}
       >
@@ -59,14 +59,14 @@ export function Navbar() {
                   onClick={() => handleNavClick(link.href)}
                   className={`
                     relative py-2 text-sm font-medium transition-colors
-                    ${activeSection === link.href ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'}
+                    ${activeSection === link.href ? 'text-text-primary' : 'text-text-secondary hover:text-accent'}
                   `}
                 >
                   {link.name}
                   {activeSection === link.href && (
                     <motion.span
                       layoutId="activeSection"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary-blue to-primary-purple"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-accent"
                     />
                   )}
                 </button>
@@ -77,15 +77,10 @@ export function Navbar() {
             <div className="hidden md:block">
               <a
                 href="/resume.pdf"
-                className="relative inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-[10px] overflow-hidden group"
+                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-[10px] border border-accent/40 text-accent hover:bg-accent/10 hover:border-accent hover:scale-[1.03] active:scale-[0.97] transition-all duration-200"
               >
-                <span className="absolute inset-0 border border-transparent bg-gradient-to-r from-primary-blue to-primary-purple opacity-100 group-hover:opacity-0 transition-opacity duration-300" style={{ padding: '1px' }} />
-                <span className="absolute inset-[1px] bg-[#050505] rounded-[9px] group-hover:opacity-0 transition-opacity duration-300" />
-                <span className="absolute inset-0 bg-gradient-to-r from-primary-blue to-primary-purple opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[10px]" />
-                <span className="relative flex items-center gap-2 text-transparent bg-clip-text bg-gradient-to-r from-primary-blue to-primary-purple group-hover:text-white transition-colors duration-300">
-                  <Download className="w-4 h-4" />
-                  Resume
-                </span>
+                <Download className="w-4 h-4" />
+                Resume
               </a>
             </div>
 
@@ -136,7 +131,7 @@ export function Navbar() {
                     onClick={() => handleNavClick(link.href)}
                     className={`
                       text-left text-lg font-medium transition-colors
-                      ${activeSection === link.href ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'}
+                      ${activeSection === link.href ? 'text-text-primary' : 'text-text-secondary hover:text-accent'}
                     `}
                   >
                     {link.name}
@@ -147,7 +142,7 @@ export function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navLinks.length * 0.1 }}
                   href="/resume.pdf"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium bg-gradient-to-r from-primary-blue to-primary-purple text-white rounded-[10px]"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium bg-accent text-[#0A0A0F] hover:bg-accent-hover rounded-[10px]"
                 >
                   <Download className="w-4 h-4" />
                   Download Resume

@@ -7,7 +7,7 @@ export function BackgroundEffects() {
       <div
         className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full animate-orb-drift"
         style={{
-          background: 'radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(45, 212, 191, 0.08) 0%, transparent 70%)',
           filter: 'blur(80px)',
         }}
       />
@@ -16,7 +16,7 @@ export function BackgroundEffects() {
       <div
         className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full animate-orb-drift-reverse"
         style={{
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.10) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(20, 184, 166, 0.06) 0%, transparent 70%)',
           filter: 'blur(80px)',
         }}
       />

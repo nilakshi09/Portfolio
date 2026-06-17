@@ -86,10 +86,10 @@ export function Experience() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.15 }}
                   transition={{ duration: 0.5, delay: 0.15 + i * 0.1 }}
-                  className="exp-stat-card"
+                  className="stat-card"
                 >
-                  <div className="exp-stat-value">{stat.value}</div>
-                  <div className="exp-stat-label">{stat.label}</div>
+                  <div className="stat-card-value">{stat.value}</div>
+                  <div className="stat-card-label">{stat.label}</div>
                 </motion.div>
               ))}
             </div>

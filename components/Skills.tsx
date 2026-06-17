@@ -56,7 +56,7 @@ export function Skills() {
                     }}
                     whileHover={{
                       scale: 1.05,
-                      boxShadow: '0 0 12px rgba(99, 102, 241, 0.15)',
+                      boxShadow: '0 0 12px rgba(45, 212, 191, 0.15)',
                     }}
                     className="
                       px-4 py-2
@@ -65,10 +65,11 @@ export function Skills() {
                       border border-white/[0.08]
                       rounded-full
                       text-text-secondary
-                      hover:border-indigo-400/40
+                      hover:border-accent/40
                       hover:text-text-primary
                       transition-all duration-200
                       cursor-default
+                      outline-none focus:outline-none
                     "
                   >
                     {skill}

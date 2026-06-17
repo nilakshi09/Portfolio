@@ -57,7 +57,7 @@
   }
 
   body {
-    @apply bg-[#050505] antialiased;
+    @apply bg-[#0A0A0F] antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
@@ -81,7 +81,7 @@
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #3B82F6 0%, #6366F1 50%, #8B5CF6 100%);
+  background: linear-gradient(135deg, #2DD4BF 0%, #14B8A6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -159,12 +159,77 @@
 }
 
 /* =====================================================
+   SCROLL PROGRESS BAR
+   ===================================================== */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #2DD4BF, #5EEAD4);
+  z-index: 9999;
+  transform-origin: left;
+  will-change: transform;
+  pointer-events: none;
+}
+
+/* =====================================================
+   UNIFIED STAT CARD COMPONENT
+   ===================================================== */
+
+.stat-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 16px 20px;
+  min-width: 80px;
+  text-align: center;
+  transition: all 0.25s ease;
+}
+
+.stat-card:hover {
+  border-color: #2DD4BF;
+  transform: translateY(-2px);
+}
+
+.stat-card-value {
+  font-family: var(--font-mono), 'JetBrains Mono', monospace;
+  font-size: 24px;
+  font-weight: 700;
+  color: #FAFAFA;
+  transition: color 0.25s ease;
+}
+
+.stat-card:hover .stat-card-value {
+  color: #2DD4BF;
+}
+
+.stat-card-label {
+  font-family: var(--font-mono), 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #A1A1AA;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* =====================================================
    PROJECTS SECTION — Split Panel Tab Layout
    ===================================================== */
 
 .cp-section {
   position: relative;
-  background: #06060f;
+  background: #08080f;
+  padding-top: 96px;
+}
+
+@media (max-width: 1024px) {
+  .cp-section { padding-top: 64px; }
+}
+
+@media (max-width: 768px) {
+  .cp-section { padding-top: 48px; }
 }
 
 /* ── Scroll entrance animation: initial hidden state ── */
@@ -217,7 +282,7 @@
 
 /* ── Header ── */
 .cp-header-wrap {
-  padding: 120px 24px 56px;
+  padding: 0 24px 56px;
   max-width: 1100px;
   margin: 0 auto;
 }
@@ -228,7 +293,7 @@
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #a78bfa;
+  color: #A1A1AA;
 }
 
 .cp-title {
@@ -253,13 +318,16 @@
 
 .cp-navbar {
   width: 100%;
-  background: #08080f;
-  border-bottom: 0.5px solid #111;
+  background: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .cp-tabs {
   display: flex;
-  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  gap: 16px;
+  padding: 0 24px;
   overflow-x: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -269,14 +337,19 @@
   display: none;
 }
 
+.cp-tabs::after {
+  content: '';
+  padding-right: 8px;
+}
+
 .cp-tab {
   flex: 1 1 0;
-  min-width: 0;
+  min-width: 120px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 16px 12px 14px;
+  gap: 8px;
+  padding: 20px 12px 18px;
   background: none;
   border: none;
   border-bottom: 2px solid transparent;
@@ -287,75 +360,79 @@
 
 .cp-tab-number {
   font-family: var(--font-mono), 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
   letter-spacing: 1px;
-  color: #333;
+  color: #A1A1AA;
   transition: color 0.2s ease;
 }
 
 .cp-tab-name {
   font-family: var(--font-mono), 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
-  letter-spacing: 1px;
-  color: #222;
+  letter-spacing: 0.5px;
+  color: #FAFAFA;
   white-space: nowrap;
   transition: color 0.2s ease;
 }
 
 .cp-tab:hover .cp-tab-name {
-  color: #555;
+  color: #2DD4BF;
 }
 
 .cp-tab:hover {
-  background: rgba(167, 139, 250, 0.04);
+  background: rgba(45, 212, 191, 0.04);
 }
 
 /* Active tab */
 .cp-tab--active {
-  border-bottom-color: #a78bfa;
+  border-bottom-color: #2DD4BF;
 }
 
 .cp-tab--active .cp-tab-name {
-  color: #a78bfa;
+  color: #2DD4BF;
 }
 
 .cp-tab--active .cp-tab-number {
-  color: #6e5fa5;
+  color: #14B8A6;
 }
 
 .cp-tab--active:hover .cp-tab-name {
-  color: #a78bfa;
+  color: #2DD4BF;
 }
 
 /* ═══════════════════════════════════════
    PART 2 — CONTENT PANEL
    ═══════════════════════════════════════ */
 
-/* Transition wrapper — relative container with fixed min-height */
+/* Transition wrapper — using Grid to overlap slides naturally */
 .cp-panel {
-  position: relative;
-  min-height: 400px;
-  overflow: hidden;
-  background: #06060f;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  max-width: 1100px;
+  margin: 40px auto 0;
+  padding: 0 24px 64px;
+  background: transparent;
 }
 
-/* Each slide: absolute, full-width, IS the grid */
+/* Each slide: now a bordered card, overlapping in the same grid cell */
 .cp-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
+  grid-column: 1;
+  grid-row: 1;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 48px;
-  padding: 48px 40px;
-  align-items: center;
+  padding: 48px;
+  align-items: flex-start;
   box-sizing: border-box;
-  max-width: 1100px;
-  margin: 0 auto;
-  right: 0;
+  
+  /* Card Styling */
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
 
   /* Default: hidden below */
   opacity: 0;
@@ -364,6 +441,7 @@
     opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   pointer-events: none;
+  z-index: 0;
 }
 
 /* Active slide: fully visible */
@@ -371,12 +449,14 @@
   opacity: 1;
   transform: translateY(0);
   pointer-events: all;
+  z-index: 1;
 }
 
 /* Exiting slide: hidden above */
 .cp-slide--exit {
   opacity: 0;
   transform: translateY(-16px);
+  z-index: 0;
 }
 
 /* ── Left column ── */
@@ -419,46 +499,60 @@
 /* Project links — bottom of left column */
 .cp-links {
   display: flex;
-  gap: 12px;
+  gap: 16px;
 }
 
 .cp-link-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 16px;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
   font-family: var(--font-mono), 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
-  color: #555;
-  background: none;
-  border: 0.5px solid #1a1a2e;
-  border-radius: 6px;
+  border-radius: 8px;
   text-decoration: none;
-  cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.cp-link-btn:hover {
-  background: rgba(167, 139, 250, 0.06);
-  border-color: #a78bfa;
-  color: #a78bfa;
-  transform: translateY(-1px);
+/* GitHub Button: Outlined */
+.cp-link-btn--github {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FAFAFA;
 }
 
-.cp-link-btn--demo:hover {
-  border-color: #a78bfa;
+.cp-link-btn--github:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.4);
 }
 
+/* Live Demo Button: Teal Filled */
+.cp-link-btn--demo {
+  background: #2DD4BF;
+  border: 1px solid #2DD4BF;
+  color: #000;
+}
+
+.cp-link-btn--demo:hover:not(.cp-link-btn--disabled) {
+  background: #14B8A6;
+  border-color: #14B8A6;
+}
+
+/* Disabled Demo Button */
 .cp-link-btn--disabled {
-  opacity: 0.3;
+  opacity: 0.5;
   cursor: not-allowed;
   pointer-events: none;
+  background: rgba(45, 212, 191, 0.1);
+  border-color: rgba(45, 212, 191, 0.2);
+  color: #2DD4BF;
 }
 
 .cp-link-icon {
-  width: 13px;
-  height: 13px;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
 }
 
@@ -482,55 +576,63 @@
 .cp-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
-  margin-bottom: 24px;
+  gap: 8px;
+  margin-bottom: 32px;
 }
 
 .cp-chip {
   font-family: var(--font-mono), 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 500;
-  color: #2a2a5e;
-  padding: 4px 11px;
-  border: 0.5px solid #1a1a3e;
-  border-radius: 4px;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  color: #A1A1AA;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
 .cp-chip:hover {
-  border-color: #a78bfa;
-  color: #a78bfa;
+  border-color: rgba(45, 212, 191, 0.4);
+  color: #2DD4BF;
+  background: rgba(45, 212, 191, 0.05);
 }
 
 /* Key metric */
 .cp-metric {
   display: flex;
-  align-items: baseline;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 8px;
 }
 
 .cp-metric-value {
   font-family: var(--font-mono), 'JetBrains Mono', monospace;
-  font-size: 28px;
-  font-weight: 500;
+  font-size: 24px;
+  font-weight: 600;
   letter-spacing: -0.5px;
 }
 
 .cp-metric-label {
   font-family: var(--font-mono), 'JetBrains Mono', monospace;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 400;
-  color: #333;
-  letter-spacing: 2px;
+  color: #A1A1AA;
+  letter-spacing: 0;
 }
 
 /* ═══════════════════════════════════════
-   RESPONSIVE — Mobile
+   RESPONSIVE — Mobile (Projects)
    ═══════════════════════════════════════ */
 
 @media (max-width: 768px) {
   .cp-header-wrap {
-    padding: 80px 20px 40px;
+    padding: 0 20px 32px;
+  }
+
+  .cp-panel {
+    padding: 0 16px 48px;
+    margin-top: 24px;
   }
 
   .cp-tab {
@@ -539,15 +641,11 @@
     padding: 14px 16px 12px;
   }
 
-  .cp-panel {
-    min-height: auto;
-  }
-
   .cp-slide {
     position: relative;
     grid-template-columns: 1fr;
     gap: 24px;
-    padding: 32px 20px 40px;
+    padding: 32px 24px;
   }
 
   /* Hide non-active slides on mobile since position is relative */
@@ -569,21 +667,26 @@
   }
 
   .cp-domain {
-    margin-bottom: 20px;
+    margin-bottom: 24px;
   }
 
   .cp-description {
-    font-size: 13px;
+    font-size: 14px;
   }
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .cp-header-wrap {
-    padding: 100px 32px 44px;
+    padding: 0 32px 40px;
+  }
+
+  .cp-panel {
+    padding: 0 24px 48px;
+    margin-top: 32px;
   }
 
   .cp-slide {
-    padding: 40px 28px;
+    padding: 40px 32px;
     gap: 32px;
   }
 
@@ -609,7 +712,6 @@
   color: #FAFAFA;
   margin-top: 12px;
   letter-spacing: -0.02em;
-  font-family: 'Georgia', 'Times New Roman', serif;
 }
 
 .experience-subtitle {
@@ -643,38 +745,6 @@
   gap: 12px;
 }
 
-/* Stat Cards */
-.exp-stat-card {
-  background: #111;
-  border: 0.5px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  padding: 12px 16px;
-  min-width: 80px;
-  text-align: center;
-  transition: all 0.25s ease;
-}
-.exp-stat-value {
-  font-family: var(--font-mono), 'JetBrains Mono', monospace;
-  font-size: 20px;
-  font-weight: 600;
-  color: #6366F1;
-  transition: filter 0.25s ease;
-}
-.exp-stat-label {
-  font-family: var(--font-mono), 'JetBrains Mono', monospace;
-  font-size: 9px;
-  color: #A1A1AA;
-  letter-spacing: 1px;
-  margin-top: 4px;
-}
-.exp-stat-card:hover {
-  border-color: #6366F1;
-  transform: translateY(-2px);
-}
-.exp-stat-card:hover .exp-stat-value {
-  filter: brightness(1.2);
-}
-
 /* Date row: dot + date on same line */
 .exp-date-row {
   display: flex;
@@ -687,7 +757,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: #6366F1;
+  background: #2DD4BF;
   flex-shrink: 0;
   transition: transform 0.2s ease;
 }
@@ -703,7 +773,7 @@
 .exp-role {
   font-size: clamp(1.625rem, 3vw, 1.75rem);
   font-weight: 700;
-  color: #6366F1;
+  color: #FAFAFA;
   letter-spacing: -1px;
   margin-bottom: 6px;
   line-height: 1.25;
@@ -741,7 +811,7 @@
 }
 
 .exp-arrow {
-  color: #6366F1;
+  color: #2DD4BF;
   font-size: 12px;
   margin-top: 2px;
   flex-shrink: 0;
@@ -778,8 +848,8 @@
 }
 
 .exp-tag:hover {
-  border-color: #6366F1;
-  color: #6366F1;
+  border-color: #2DD4BF;
+  color: #2DD4BF;
 }
 
 /* ---------- Responsive ---------- */
@@ -791,9 +861,6 @@
   }
   .exp-right {
     width: 100%;
-  }
-  .exp-stat-card {
-    flex: 1;
   }
 
   .exp-date-row {
@@ -811,13 +878,13 @@
 }
 
 /* =====================================================
-   CONTACT SECTION â€” Premium Portfolio Finale
+   CONTACT SECTION — Premium Portfolio Finale
    ===================================================== */
 
 .contact-finale {
   position: relative;
   overflow: hidden;
-  padding: 160px 24px 120px;
+  padding: 96px 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -837,13 +904,13 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(100px);
-  opacity: 0.25;
+  opacity: 0.20;
   will-change: transform;
 }
 .contact-orb--primary {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, #6366F1 0%, transparent 70%);
+  background: radial-gradient(circle, #2DD4BF 0%, transparent 70%);
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
@@ -852,7 +919,7 @@
 .contact-orb--secondary {
   width: 350px;
   height: 350px;
-  background: radial-gradient(circle, #8B5CF6 0%, transparent 70%);
+  background: radial-gradient(circle, #14B8A6 0%, transparent 70%);
   bottom: 15%;
   left: 20%;
   animation: contact-orb-float-reverse 22s ease-in-out infinite;
@@ -860,7 +927,7 @@
 .contact-orb--accent {
   width: 280px;
   height: 280px;
-  background: radial-gradient(circle, #3B82F6 0%, transparent 70%);
+  background: radial-gradient(circle, #5EEAD4 0%, transparent 70%);
   top: 40%;
   right: 15%;
   animation: contact-orb-float-diagonal 25s ease-in-out infinite;
@@ -905,21 +972,16 @@
   align-items: center;
 }
 
-/* ---------- Section label ---------- */
+/* ---------- Section label (plain monospace, NO pill) ---------- */
 .contact-label {
   display: inline-block;
   font-family: var(--font-mono), 'JetBrains Mono', monospace;
   font-size: 11px;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #A1A1AA;
   margin-bottom: 28px;
-  padding: 6px 16px;
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 100px;
-  background: rgba(255,255,255,0.02);
-  backdrop-filter: blur(8px);
 }
 
 /* ---------- Heading ---------- */
@@ -931,13 +993,13 @@
   letter-spacing: -0.02em;
   margin-bottom: 24px;
   max-width: 750px;
-  font-family: 'Georgia', 'Times New Roman', serif;
 }
 .contact-heading-accent {
-  background: linear-gradient(135deg, #818CF8 0%, #A78BFA 40%, #C084FC 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #2DD4BF;
+  -webkit-text-fill-color: #2DD4BF;
+  background: none;
+  -webkit-background-clip: unset;
+  background-clip: unset;
 }
 
 /* ---------- Supporting text ---------- */
@@ -967,7 +1029,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(ellipse at center, rgba(99,102,241,0.12) 0%, rgba(139,92,246,0.06) 40%, transparent 70%);
+  background: radial-gradient(ellipse at center, rgba(45,212,191,0.10) 0%, rgba(20,184,166,0.05) 40%, transparent 70%);
   border-radius: 50%;
   pointer-events: none;
   animation: contact-glow-pulse 4s ease-in-out infinite;
@@ -996,14 +1058,14 @@
   font-size: clamp(1.15rem, 3vw, 1.75rem);
   font-weight: 500;
   letter-spacing: 0.01em;
-  color: #E0E7FF;
+  color: #CCFBF1;
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 .contact-email:hover .contact-email-text {
-  color: #C7D2FE;
+  color: #5EEAD4;
   text-shadow:
-    0 0 20px rgba(99,102,241,0.3),
-    0 0 40px rgba(139,92,246,0.15);
+    0 0 20px rgba(45,212,191,0.3),
+    0 0 40px rgba(20,184,166,0.15);
 }
 
 /* Underline animation */
@@ -1012,7 +1074,7 @@
   width: 0;
   height: 1.5px;
   margin-top: 6px;
-  background: linear-gradient(90deg, #6366F1, #8B5CF6, #A78BFA);
+  background: linear-gradient(90deg, #14B8A6, #2DD4BF, #5EEAD4);
   border-radius: 2px;
   transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -1026,7 +1088,7 @@
   margin-top: 14px;
   font-size: 13px;
   font-weight: 500;
-  color: #818CF8;
+  color: #2DD4BF;
   letter-spacing: 0.02em;
   pointer-events: none;
 }
@@ -1070,7 +1132,7 @@
   transition: color 0.3s ease;
 }
 .contact-social-link:hover .contact-social-link-text {
-  color: #E0E7FF;
+  color: #2DD4BF;
 }
 
 /* Underline reveal */
@@ -1079,7 +1141,7 @@
   width: 0;
   height: 1px;
   margin-top: 4px;
-  background: linear-gradient(90deg, #6366F1, #8B5CF6);
+  background: linear-gradient(90deg, #14B8A6, #2DD4BF);
   border-radius: 1px;
   transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -1091,7 +1153,7 @@
 
 @media (max-width: 768px) {
   .contact-finale {
-    padding: 100px 20px 80px;
+    padding: 48px 20px;
     min-height: auto;
   }
   .contact-heading {
@@ -1133,7 +1195,7 @@
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .contact-finale {
-    padding: 130px 32px 100px;
+    padding: 64px 32px;
   }
   .contact-orb--primary {
     width: 400px;

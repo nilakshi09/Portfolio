@@ -4,19 +4,8 @@ import { useRef, useState, useEffect } from 'react';
 import { Github, ExternalLink } from 'lucide-react';
 import { projects } from '@/lib/constants';
 
-/* ─── Accent colors per project ─── */
-const ACCENT_COLORS = [
-  '#a78bfa',
-  '#60a5fa',
-  '#34d399',
-  '#fbbf24',
-  '#f472b6',
-  '#2dd4bf',
-];
-
-function getAccent(index: number) {
-  return ACCENT_COLORS[index % ACCENT_COLORS.length];
-}
+/* ─── Accent color ─── */
+const PROJECT_ACCENT = '#2DD4BF';
 
 /* ─── Main section ─── */
 export function Projects() {
@@ -106,7 +95,6 @@ export function Projects() {
         {projects.map((project, index) => {
           const isActive = index === activeIndex;
           const isExiting = index === exitIndex;
-          const projAccent = getAccent(index);
 
           let slideClass = 'cp-slide';
           if (isActive) slideClass += ' cp-slide--active';
@@ -122,7 +110,7 @@ export function Projects() {
 
                 <h3
                   className="cp-project-name"
-                  style={{ color: projAccent }}
+                  style={{ color: PROJECT_ACCENT }}
                 >
                   {project.title}
                 </h3>
@@ -130,21 +118,16 @@ export function Projects() {
                 <span className="cp-domain">{project.category}</span>
 
                 <div className="cp-links">
-                  {project.github ? (
+                  {project.github && (
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="cp-link-btn"
+                      className="cp-link-btn cp-link-btn--github"
                     >
                       <Github className="cp-link-icon" />
                       <span>GitHub</span>
                     </a>
-                  ) : (
-                    <span className="cp-link-btn cp-link-btn--disabled">
-                      <Github className="cp-link-icon" />
-                      <span>GitHub</span>
-                    </span>
                   )}
 
                   {project.live ? (
@@ -158,10 +141,15 @@ export function Projects() {
                       <span>Live Demo</span>
                     </a>
                   ) : (
-                    <span className="cp-link-btn cp-link-btn--disabled">
+                    <button
+                      type="button"
+                      disabled
+                      className="cp-link-btn cp-link-btn--demo cp-link-btn--disabled"
+                      title="No live demo available"
+                    >
                       <ExternalLink className="cp-link-icon" />
                       <span>Live Demo</span>
-                    </span>
+                    </button>
                   )}
                 </div>
               </div>
@@ -182,7 +170,7 @@ export function Projects() {
                   <div className="cp-metric">
                     <span
                       className="cp-metric-value"
-                      style={{ color: projAccent }}
+                      style={{ color: PROJECT_ACCENT }}
                     >
                       {project.mockUI[0]}
                     </span>
