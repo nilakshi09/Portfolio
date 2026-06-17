@@ -1,336 +1,202 @@
 'use client';
 
-import { useRef, useState, useCallback } from 'react';
-import {
-  motion,
-  AnimatePresence,
-  useInView,
-} from 'framer-motion';
-import { Github, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import { Github, ExternalLink } from 'lucide-react';
 import { projects } from '@/lib/constants';
 
-/* ─── Accent color ─── */
-const ACCENT = '#6366f1'; // electric indigo
+/* ─── Accent colors per project ─── */
+const ACCENT_COLORS = [
+  '#a78bfa',
+  '#60a5fa',
+  '#34d399',
+  '#fbbf24',
+  '#f472b6',
+  '#2dd4bf',
+];
 
-/* ─── Animation variants ─── */
-const rowVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      delay: i * 0.08,
-      duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
-    },
-  }),
-};
-
-const accordionVariants = {
-  collapsed: {
-    height: 0,
-    opacity: 0,
-    transition: {
-      height: { type: 'spring' as const, stiffness: 300, damping: 35 },
-      opacity: { duration: 0.15 },
-    },
-  },
-  expanded: {
-    height: 'auto',
-    opacity: 1,
-    transition: {
-      height: { type: 'spring' as const, stiffness: 300, damping: 35 },
-      opacity: { duration: 0.25, delay: 0.08 },
-    },
-  },
-};
-
-/* ─── Floating preview tooltip ─── */
-function PreviewTooltip({
-  project,
-  mouseY,
-  parentRect,
-}: {
-  project: (typeof projects)[0];
-  mouseY: number;
-  parentRect: DOMRect | null;
-}) {
-  if (!parentRect) return null;
-
-  // Position the tooltip near the row, offset to the right
-  const relativeY = mouseY - parentRect.top;
-
-  return (
-    <motion.div
-      className="edl-preview"
-      initial={{ opacity: 0, scale: 0.92, x: -10 }}
-      animate={{ opacity: 1, scale: 1, x: 0 }}
-      exit={{ opacity: 0, scale: 0.92, x: -10 }}
-      transition={{ duration: 0.15, ease: 'easeOut' }}
-      style={{
-        top: Math.max(0, Math.min(relativeY - 60, parentRect.height - 140)),
-      }}
-    >
-      <p className="edl-preview-problem">{project.problem}</p>
-      <div className="edl-preview-pills">
-        {project.stack.slice(0, 3).map((tech) => (
-          <span key={tech} className="edl-preview-pill">
-            {tech}
-          </span>
-        ))}
-      </div>
-    </motion.div>
-  );
-}
-
-/* ─── Single project row ─── */
-function ProjectRow({
-  project,
-  index,
-  isExpanded,
-  onToggle,
-}: {
-  project: (typeof projects)[0];
-  index: number;
-  isExpanded: boolean;
-  onToggle: () => void;
-}) {
-  const rowRef = useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = useState(false);
-  const [mouseY, setMouseY] = useState(0);
-  const [rowRect, setRowRect] = useState<DOMRect | null>(null);
-  const isInView = useInView(rowRef, { once: true, margin: '-60px' });
-
-  const formattedIndex = String(index + 1).padStart(2, '0');
-
-  const handleMouseEnter = useCallback(() => {
-    setIsHovered(true);
-    if (rowRef.current) {
-      setRowRect(rowRef.current.getBoundingClientRect());
-    }
-  }, []);
-
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      setMouseY(e.clientY);
-      if (rowRef.current) {
-        setRowRect(rowRef.current.getBoundingClientRect());
-      }
-    },
-    []
-  );
-
-  const handleMouseLeave = useCallback(() => {
-    setIsHovered(false);
-  }, []);
-
-  return (
-    <motion.div
-      ref={rowRef}
-      className="edl-row-wrapper"
-      custom={index}
-      variants={rowVariants}
-      initial="hidden"
-      animate={isInView ? 'visible' : 'hidden'}
-    >
-      {/* ── Clickable row ── */}
-      <div
-        className={`edl-row ${isHovered ? 'edl-row--hovered' : ''} ${isExpanded ? 'edl-row--expanded' : ''}`}
-        onClick={onToggle}
-        onMouseEnter={handleMouseEnter}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        role="button"
-        tabIndex={0}
-        aria-expanded={isExpanded}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            onToggle();
-          }
-        }}
-      >
-        {/* Left accent border on hover */}
-        <div className="edl-row-accent" aria-hidden="true" />
-
-        {/* Index number */}
-        <span className="edl-index">{formattedIndex}</span>
-
-        {/* Project name */}
-        <h3 className="edl-name">
-          <span className="edl-name-text">{project.title}</span>
-        </h3>
-
-        {/* Category + tags */}
-        <div className="edl-tags">
-          <span className="edl-category">{project.category}</span>
-          <div className="edl-stack-preview">
-            {project.stack.slice(0, 2).map((tech) => (
-              <span key={tech} className="edl-stack-tag">
-                {tech}
-              </span>
-            ))}
-            {project.stack.length > 2 && (
-              <span className="edl-stack-tag edl-stack-tag--more">
-                +{project.stack.length - 2}
-              </span>
-            )}
-          </div>
-        </div>
-
-        {/* Arrow icon */}
-        <div className="edl-arrow-wrap">
-          <ArrowUpRight className="edl-arrow" />
-        </div>
-
-        {/* Floating preview — desktop only */}
-        <AnimatePresence>
-          {isHovered && !isExpanded && (
-            <PreviewTooltip
-              project={project}
-              mouseY={mouseY}
-              parentRect={rowRect}
-            />
-          )}
-        </AnimatePresence>
-      </div>
-
-      {/* ── Accordion detail panel ── */}
-      <AnimatePresence initial={false}>
-        {isExpanded && (
-          <motion.div
-            className="edl-detail"
-            variants={accordionVariants}
-            initial="collapsed"
-            animate="expanded"
-            exit="collapsed"
-          >
-            <div className="edl-detail-inner">
-              <div className="edl-detail-grid">
-                {/* Left: description */}
-                <div className="edl-detail-left">
-                  <div className="edl-detail-block">
-                    <span className="edl-detail-label">Problem</span>
-                    <p className="edl-detail-text edl-detail-text--problem">
-                      {project.problem}
-                    </p>
-                  </div>
-                  <div className="edl-detail-block">
-                    <span className="edl-detail-label">Description</span>
-                    <p className="edl-detail-text">{project.description}</p>
-                  </div>
-                </div>
-
-                {/* Right: stack + links */}
-                <div className="edl-detail-right">
-                  <div className="edl-detail-block">
-                    <span className="edl-detail-label">Tech Stack</span>
-                    <div className="edl-detail-pills">
-                      {project.stack.map((tech) => (
-                        <span key={tech} className="edl-pill">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div className="edl-detail-block">
-                    <span className="edl-detail-label">Links</span>
-                    <div className="edl-detail-links">
-                      {project.github ? (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="edl-link"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <Github className="edl-link-ico" />
-                          <span>GitHub</span>
-                          <ArrowUpRight className="edl-link-arrow" />
-                        </a>
-                      ) : (
-                        <span className="edl-link edl-link--disabled">
-                          <Github className="edl-link-ico" />
-                          <span>GitHub</span>
-                        </span>
-                      )}
-
-                      {project.live ? (
-                        <a
-                          href={project.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="edl-link"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <ExternalLink className="edl-link-ico" />
-                          <span>Live Demo</span>
-                          <ArrowUpRight className="edl-link-arrow" />
-                        </a>
-                      ) : (
-                        <span className="edl-link edl-link--disabled">
-                          <ExternalLink className="edl-link-ico" />
-                          <span>Live Demo</span>
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Divider */}
-      <div className="edl-divider" />
-    </motion.div>
-  );
+function getAccent(index: number) {
+  return ACCENT_COLORS[index % ACCENT_COLORS.length];
 }
 
 /* ─── Main section ─── */
 export function Projects() {
-  const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [exitIndex, setExitIndex] = useState<number | null>(null);
+  const [revealed, setRevealed] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
 
-  const handleToggle = useCallback((id: number) => {
-    setExpandedId((prev) => (prev === id ? null : id));
+  const totalProjects = projects.length;
+
+  function handleTabClick(index: number) {
+    if (index === activeIndex) return;
+    setExitIndex(activeIndex);
+    setActiveIndex(index);
+    // Clear exit state after transition finishes
+    setTimeout(() => setExitIndex(null), 500);
+  }
+
+  // Scroll active tab into view on mobile
+  useEffect(() => {
+    if (!tabsRef.current) return;
+    const activeTab = tabsRef.current.children[activeIndex] as HTMLElement;
+    if (activeTab) {
+      activeTab.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  }, [activeIndex]);
+
+  // IntersectionObserver for scroll entrance animation
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setRevealed(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   return (
-    <section id="projects" ref={sectionRef} className="edl-section">
-      {/* Header */}
-      <div className="edl-header-wrap">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="edl-header"
-        >
-          <span className="edl-header-tag">Projects</span>
-          <h2 className="edl-title">Selected Work</h2>
-          <p className="edl-subtitle">
+    <section
+      id="projects"
+      ref={sectionRef}
+      className={`cp-section ${revealed ? 'cp-revealed' : ''}`}
+    >
+      {/* ── Section header ── */}
+      <div className="cp-header-wrap">
+        <div className="cp-header cp-anim-header">
+          <span className="cp-header-tag">Projects</span>
+          <h2 className="cp-title">Selected Work</h2>
+          <p className="cp-subtitle">
             Real products. Real users. Real impact.
           </p>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Project list */}
-      <div className="edl-list">
-        {/* Top divider */}
-        <div className="edl-divider edl-divider--top" />
+      {/* ── PART 1: Project Navbar ── */}
+      <div className="cp-navbar">
+        <div className="cp-tabs" ref={tabsRef}>
+          {projects.map((project, index) => (
+            <button
+              key={project.id}
+              className={`cp-tab cp-anim-tab ${activeIndex === index ? 'cp-tab--active' : ''}`}
+              onClick={() => handleTabClick(index)}
+              type="button"
+              aria-label={`View project: ${project.title}`}
+              style={{ '--tab-delay': `${index * 0.05}s` } as React.CSSProperties}
+            >
+              <span className="cp-tab-number">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <span className="cp-tab-name">{project.title}</span>
+            </button>
+          ))}
+        </div>
+      </div>
 
-        {projects.map((project, index) => (
-          <ProjectRow
-            key={project.id}
-            project={project}
-            index={index}
-            isExpanded={expandedId === project.id}
-            onToggle={() => handleToggle(project.id)}
-          />
-        ))}
+      {/* ── PART 2: Content Panel ── */}
+      <div className="cp-panel">
+        {/* All slides rendered, visibility controlled via CSS */}
+        {projects.map((project, index) => {
+          const isActive = index === activeIndex;
+          const isExiting = index === exitIndex;
+          const projAccent = getAccent(index);
+
+          let slideClass = 'cp-slide';
+          if (isActive) slideClass += ' cp-slide--active';
+          else if (isExiting) slideClass += ' cp-slide--exit';
+
+          return (
+            <div key={project.id} className={slideClass}>
+              {/* ── LEFT COLUMN ── */}
+              <div className="cp-col-left cp-anim-left">
+                <span className="cp-counter">
+                  {String(index + 1).padStart(2, '0')} / {String(totalProjects).padStart(2, '0')}
+                </span>
+
+                <h3
+                  className="cp-project-name"
+                  style={{ color: projAccent }}
+                >
+                  {project.title}
+                </h3>
+
+                <span className="cp-domain">{project.category}</span>
+
+                <div className="cp-links">
+                  {project.github ? (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cp-link-btn"
+                    >
+                      <Github className="cp-link-icon" />
+                      <span>GitHub</span>
+                    </a>
+                  ) : (
+                    <span className="cp-link-btn cp-link-btn--disabled">
+                      <Github className="cp-link-icon" />
+                      <span>GitHub</span>
+                    </span>
+                  )}
+
+                  {project.live ? (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="cp-link-btn cp-link-btn--demo"
+                    >
+                      <ExternalLink className="cp-link-icon" />
+                      <span>Live Demo</span>
+                    </a>
+                  ) : (
+                    <span className="cp-link-btn cp-link-btn--disabled">
+                      <ExternalLink className="cp-link-icon" />
+                      <span>Live Demo</span>
+                    </span>
+                  )}
+                </div>
+              </div>
+
+              {/* ── RIGHT COLUMN ── */}
+              <div className="cp-col-right cp-anim-right">
+                <p className="cp-description">{project.description}</p>
+
+                <div className="cp-chips">
+                  {project.stack.map((tech) => (
+                    <span key={tech} className="cp-chip">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                {project.mockUI && project.mockUI.length > 0 && (
+                  <div className="cp-metric">
+                    <span
+                      className="cp-metric-value"
+                      style={{ color: projAccent }}
+                    >
+                      {project.mockUI[0]}
+                    </span>
+                    {project.mockUI.length > 1 && (
+                      <span className="cp-metric-label">
+                        {project.mockUI.slice(1).join(' · ')}
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
