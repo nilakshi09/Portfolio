@@ -45,7 +45,11 @@ export function Experience() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="experience-header"
         >
-          <h2 className="experience-title">Experience</h2>
+          <div className="font-mono text-[11px] font-normal tracking-[0.14em] uppercase text-[#A1A1AA] mb-6">
+            <span className="text-[#14b8a6]">05</span> &nbsp;EXPERIENCE
+          </div>
+          <br />
+          {/* <h2 className="experience-title">Experience</h2> */}
         </motion.div>
 
         {/* Experience Entry — open layout */}

@@ -43,9 +43,9 @@ const config: Config = {
         button: '10px',
       },
       spacing: {
-        'section': '96px',
-        'section-tablet': '64px',
-        'section-mobile': '48px',
+        'section': '160px',
+        'section-tablet': '128px',
+        'section-mobile': '112px',
       },
       keyframes: {
         'accordion-down': {

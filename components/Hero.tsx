@@ -12,14 +12,15 @@ export function Hero() {
         {/* Left Side — Label + Name */}
         <div className="pt-20 lg:pt-28">
           {/* Eyebrow */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="font-mono text-xs uppercase tracking-wider text-text-secondary mb-6"
-          >
-            — Full Stack Developer
-          </motion.p>
+        <motion.div
+  initial={{ opacity: 0, y: 10 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+  className="flex items-center gap-4 font-mono text-xs uppercase tracking-[0.28em] text-[#8A8A8A]"
+>
+  <div className="w-9 h-[0.5px] bg-[#5EEAD4]/60" />
+  <span>FULL STACK DEVELOPER</span>
+</motion.div>
 
           {/* Headline */}
           <h1 className="mb-0">
@@ -52,10 +53,10 @@ export function Hero() {
         >
           {/* Description */}
           <p className="text-[16.5px] font-light text-text-secondary leading-[1.72] mb-8">
-            I write code that ships —{' '}
-            <span className="text-text-primary/80">full-stack, end-to-end,</span>{' '}
-            built with intention and the kind of care{' '}
-            <span className="font-medium text-text-primary">that shows up in the details.</span>
+            I design and develop full-stack web applications —{' '}
+            <span className="text-text-primary/80">from idea to deployment,</span>{' '}
+            with a focus on performance, clarity, and{' '}
+            <span className="font-medium text-text-primary">thoughtful user experience.</span>
           </p>
 
           {/* CTA Buttons */}
@@ -69,10 +70,10 @@ export function Hero() {
             </a>
             <a
               href="mailto:nilakshirahangdale31@gmail.com"
-              className="inline-flex items-center gap-2 px-7 py-3.5 text-[15px] font-medium rounded-[10px] border border-accent/40 text-accent hover:bg-accent/10 hover:border-accent hover:scale-[1.03] active:scale-[0.97] transition-all duration-200"
+              className="cp-link-btn cp-link-btn--demo"
             >
-              <Mail className="w-4 h-4" />
-              Get In Touch
+              <Mail className="cp-link-icon" />
+              <span>Get In Touch</span>
             </a>
           </div>
 

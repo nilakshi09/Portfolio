@@ -36,23 +36,28 @@ export function Navbar() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
         className={`
-          fixed top-0 left-0 right-0 z-50 transition-all duration-300
+          fixed top-0 left-0 right-0 z-50 px-6 lg:px-8 transition-all duration-300
           ${isScrolled ? 'backdrop-blur-xl bg-[#0A0A0F]/80 border-b border-white/[0.06]' : ''}
           ${scrollDirection === 'down' ? '-translate-y-full' : 'translate-y-0'}
         `}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="flex items-center justify-between h-16 relative">
             {/* Logo */}
             <a
               href="#"
-              className="text-xl font-bold tracking-wide gradient-text"
+              className="text-xl font-bold tracking-wide gradient-text flex-shrink-0 z-10"
             >
-              NR
+              <svg width="36" height="36" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="2" y="2" width="44" height="44" rx="4" stroke="#2DD4BF" strokeWidth="1.5"/>
+  <path d="M10 36V12l12 18V12" stroke="#f9fafb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M28 12h6a4 4 0 010 8h-6v0" stroke="#2DD4BF" strokeWidth="2" strokeLinecap="round"/>
+  <path d="M28 20l8 16" stroke="#2DD4BF" strokeWidth="2" strokeLinecap="round"/>
+</svg>
             </a>
 
             {/* Desktop Nav */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center gap-8 z-0">
               {navLinks.map((link) => (
                 <button
                   key={link.name}
@@ -73,24 +78,30 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* Resume Button */}
-            <div className="hidden md:block">
-              <a
-                href="/resume.pdf"
-                className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-[10px] border border-accent/40 text-accent hover:bg-accent/10 hover:border-accent hover:scale-[1.03] active:scale-[0.97] transition-all duration-200"
-              >
-                <Download className="w-4 h-4" />
-                Resume
-              </a>
-            </div>
+            {/* Right Actions */}
+            <div className="flex-shrink-0 z-10 flex items-center">
+              {/* Resume Button */}
+              <div className="hidden md:block">
+                <a
+                  href="https://nilakshirahangdaleresume.vercel.app/"
+                  download="Nilakshi_Rahangdale_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cp-link-btn cp-link-btn--github"
+                >
+                  <Download className="cp-link-icon" />
+                  <span>Resume</span>
+                </a>
+              </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(true)}
-              className="md:hidden p-2 text-text-secondary hover:text-text-primary transition-colors"
-            >
-              <Menu className="w-6 h-6" />
-            </button>
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(true)}
+                className="md:hidden p-2 text-text-secondary hover:text-text-primary transition-colors"
+              >
+                <Menu className="w-6 h-6" />
+              </button>
+            </div>
           </div>
         </div>
       </motion.nav>
@@ -141,11 +152,14 @@ export function Navbar() {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navLinks.length * 0.1 }}
-                  href="/resume.pdf"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-3 text-sm font-medium bg-accent text-[#0A0A0F] hover:bg-accent-hover rounded-[10px]"
+                  href="/Nilakshi_Rahangdale_Resume.pdf"
+                  download="Nilakshi_Rahangdale_Resume.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cp-link-btn cp-link-btn--github"
                 >
-                  <Download className="w-4 h-4" />
-                  Download Resume
+                  <Download className="cp-link-icon" />
+                  <span>Download Resume</span>
                 </motion.a>
               </div>
             </motion.div>

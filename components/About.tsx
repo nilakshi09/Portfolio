@@ -3,9 +3,9 @@
 import { motion } from 'framer-motion';
 
 const aboutStats = [
-  { value: '5+', label: 'Projects Shipped', sublabel: 'SaaS · IoT · Web' },
-  { value: '1', label: 'Internship', sublabel: 'Full-Stack · NexisparkX' },
-  { value: '3+', label: 'Systems Built', sublabel: 'ERP · LMS · IoT' },
+  { value: '5+', label: 'Projects Shipped' },
+  { value: '1', label: 'Internship' },
+  { value: '27', label: 'Graduating' }
 ];
 
 export function About() {
@@ -17,10 +17,23 @@ export function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="experience-header"
+          className="about-header"
         >
-          <h2 className="experience-title">About</h2>
+          <div className="font-mono text-[11px] font-normal tracking-[0.14em] uppercase text-[#A1A1AA] mb-6">
+            <span className="text-[#14b8a6]">01</span> &nbsp;ABOUT
+          </div>
+          {/* <h2 className="cp-title mb-8">About</h2> */}
+          <br />
+          <h3 className="about-title">I engineer the backend. I design the frontend. I ship the whole thing.</h3>
         </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, width: 0 }}
+          whileInView={{ opacity: 1, width: "100%" }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="about-divider"
+        />
 
         <div className="about-grid">
           {/* Left column — bio text */}
@@ -28,23 +41,20 @@ export function About() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
             className="about-bio"
           >
             <p>
-              {"I'm a final-year Computer Science student at PIEMR, Indore — building full-stack applications that actually ship."}
-            </p>
-            <p>
-              {"I've worked as a Full-Stack Developer Intern at NexisparkX Technologies, contributing to ERP systems, LMS platforms, and real-time sensor pipelines. My stack spans React, Next.js, Node.js, PostgreSQL, and modern frontend tooling."}
+              Final-year CS student at PIEMR, Indore — currently building production-grade web applications and caring deeply about every layer in between.
             </p>
           </motion.div>
 
-          {/* Right column — stats table */}
+          {/* Right column — stats horizontal */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="about-stats"
           >
             {aboutStats.map((stat, index) => (
@@ -53,14 +63,20 @@ export function About() {
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.2 + index * 0.1 }}
-                className={`about-stat-row ${index === 0 ? 'about-stat-row--first' : ''}`}
+                transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                className="about-stat-item"
               >
-                <span className="about-stat-value">{stat.value}</span>
-                <div className="about-stat-info">
-                  <span className="about-stat-label">{stat.label}</span>
-                  <span className="about-stat-sublabel">{stat.sublabel}</span>
-                </div>
+                <span className="about-stat-value">
+                  {stat.label === 'Graduating' ? (
+                    <div className="flex items-start">
+                      <span className="relative -top-[0.15em] mr-[0.08em] font-light">’</span>
+                      <span>{stat.value}</span>
+                    </div>
+                  ) : (
+                    stat.value
+                  )}
+                </span>
+                <span className="about-stat-label">{stat.label}</span>
               </motion.div>
             ))}
           </motion.div>

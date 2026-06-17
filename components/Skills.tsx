@@ -15,9 +15,13 @@ export function Skills() {
           transition={{ duration: 0.5 }}
           className="mb-6"
         >
-          <h2 className="text-4xl font-bold text-text-primary">
+          <div className="font-mono text-[11px] font-normal tracking-[0.14em] uppercase text-[#A1A1AA] mb-6">
+            <span className="text-[#14b8a6]">02</span> &nbsp;TECH STACK
+          </div>
+          <br />
+          {/* <h2 className="text-4xl font-bold text-text-primary">
             Tech Stack
-          </h2>
+          </h2> */}
         </motion.div>
 
         {/* Skill Groups */}

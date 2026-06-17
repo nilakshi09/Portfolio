@@ -61,38 +61,51 @@ export function Projects() {
     <section
       id="projects"
       ref={sectionRef}
-      className={`cp-section ${revealed ? 'cp-revealed' : ''}`}
+      className={`cp-section px-6 lg:px-8 ${revealed ? 'cp-revealed' : ''}`}
     >
-      {/* ── Section header ── */}
-      <div className="cp-header-wrap">
-        <div className="cp-header cp-anim-header">
-          <h2 className="cp-title">Projects</h2>
+      <div className="max-w-7xl mx-auto w-full">
+        {/* ── Section header ── */}
+        <div className="cp-header-wrap">
+          <div className="cp-header cp-anim-header">
+          <div className="font-mono text-[11px] font-normal tracking-[0.14em] uppercase text-[#A1A1AA] mb-6">
+            <span className="text-[#14b8a6]">04</span> &nbsp;PROJECTS
+          </div>
+          {/* <h2 className="cp-title">Projects</h2> */}
         </div>
       </div>
 
-      {/* ── PART 1: Project Navbar ── */}
-      <div className="cp-navbar">
-        <div className="cp-tabs" ref={tabsRef}>
-          {projects.map((project, index) => (
-            <button
-              key={project.id}
-              className={`cp-tab cp-anim-tab ${activeIndex === index ? 'cp-tab--active' : ''}`}
-              onClick={() => handleTabClick(index)}
-              type="button"
-              aria-label={`View project: ${project.title}`}
-              style={{ '--tab-delay': `${index * 0.05}s` } as React.CSSProperties}
-            >
-              <span className="cp-tab-number">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <span className="cp-tab-name">{project.title}</span>
-            </button>
-          ))}
+      {/* ── Glassmorphism Card Wrapper ── */}
+      <div style={{
+        background: 'rgba(255, 255, 255, 0.03)',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+        borderRadius: '16px',
+        padding: '2rem 2rem 3rem 2rem',
+        backdropFilter: 'blur(12px)',
+        overflow: 'hidden'
+      }}>
+        {/* ── PART 1: Project Navbar ── */}
+        <div className="cp-navbar" style={{ borderBottom: '1px solid rgba(255, 255, 255, 0.06)' }}>
+          <div className="cp-tabs" ref={tabsRef} style={{ background: 'transparent', border: 'none' }}>
+            {projects.map((project, index) => (
+              <button
+                key={project.id}
+                className={`cp-tab cp-anim-tab ${activeIndex === index ? 'cp-tab--active' : ''}`}
+                onClick={() => handleTabClick(index)}
+                type="button"
+                aria-label={`View project: ${project.title}`}
+                style={{ '--tab-delay': `${index * 0.05}s` } as React.CSSProperties}
+              >
+                <span className="cp-tab-number">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <span className="cp-tab-name">{project.title}</span>
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
-
-      {/* ── PART 2: Content Panel ── */}
-      <div className="cp-panel">
+        
+        {/* ── PART 2: Content Panel ── */}
+        <div className="cp-panel">
         {/* All slides rendered, visibility controlled via CSS */}
         {projects.map((project, index) => {
           const isActive = index === activeIndex;
@@ -181,6 +194,8 @@ export function Projects() {
             </div>
           );
         })}
+      </div>
+      </div>
       </div>
     </section>
   );

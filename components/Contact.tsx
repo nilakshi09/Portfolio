@@ -48,15 +48,15 @@ export function Contact() {
 
       <div className="contact-inner">
         {/* Section label */}
-        <motion.span
+        <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="contact-label"
+          className="font-mono text-[11px] font-normal tracking-[0.14em] uppercase text-[#A1A1AA] mb-6 block"
         >
-          Contact
-        </motion.span>
+          {/* <span className="text-[#14b8a6]">05</span> &nbsp;CONTACT */}
+        </motion.div>
 
         {/* Main heading */}
         <motion.h2
